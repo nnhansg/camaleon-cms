@@ -277,7 +277,7 @@ class PluginRoutes
   # return all translations for all languages, sample: ['Sample', 'Ejemplo', '....']
   def self.all_translations(key, *args)
     args = args.extract_options!
-    all_locales.split('|').map{|_l| I18n.t(key, args.merge({locale: _l})) }.uniq
+    all_locales.split('|').map{|_l| I18n.t(key, **args.merge({locale: _l})) }.uniq
   end
 
   # return all locales for translated routes
@@ -402,7 +402,9 @@ class PluginRoutes
 
   # return the default url options for Camaleon CMS
   def self.default_url_options
-    {host: (CamaleonCms::Site.main_site.slug rescue "")}
+    options = { host: (CamaleonCms::Site.main_site.slug rescue "") }
+    options.merge!({ protocol: 'https' }) if Rails.application.config.force_ssl
+    options
   end
 
   def self.migration_class
@@ -410,28 +412,3 @@ class PluginRoutes
   end
 end
 CamaManager = PluginRoutes
-
-#********* fix missing helper method for breadcrumb on rails gem **********#
-if PluginRoutes.isRails5?
-  module BreadcrumbsOnRails
-    module ActionController extend ActiveSupport::Concern
-      def self.included(base = nil, &block)
-        if base.nil?
-          @_included_block = block
-        else
-          super
-        end
-      end
-
-      included do |base|
-        extend          ClassMethods
-        helper          HelperMethods if respond_to? :helper
-        helper_method   :add_breadcrumb, :breadcrumbs  if respond_to? :helper_method
-
-        unless base.respond_to?(:before_action)
-          base.alias_method :before_action, :before_filter
-        end
-      end
-    end
-  end
-end

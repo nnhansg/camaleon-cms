@@ -1,5 +1,34 @@
 # Change Log
 
+## [2.5.3.1](https://github.com/owen2345/camaleon-cms/tree/2.4.6.6) (2020-08-04)
+- Use non-digest-assets gem for using 3rd party assets (fix missing not found glyphicon fonts)
+
+## [2.5.3](https://github.com/owen2345/camaleon-cms/tree/2.4.6.6) (2020-07-02)
+- Russian locale additions and fixes
+- Fix deprecation warnings present in Ruby 2.7 and Rails 6.0
+- Fix admin error path
+- Process shortcodes when evaluating widgets
+- Add canonical option to seo
+- Theme template include i18n
+- Upgrade Bootstrap from 3.3.4 to 3.4.1
+
+## [2.5.0](https://github.com/owen2345/camaleon-cms/tree/2.4.6.6) (2020-01-08)
+- feat: sprockets 4 support
+- feat: for sprockets 4, generate config manifest to precompile
+- feat: precompile assets only for sprockets <= 3x
+- fix: Rails 6 missing to_s for session id
+- fix: preview error 
+
+## [2.4.6.7](https://github.com/owen2345/camaleon-cms/tree/2.4.6.6) (2019-08-05)
+- Fixed rails 6 bundle install error
+- Added https to default uri options
+- Use default page if no other pages exist
+
+## [2.4.6.4](https://github.com/owen2345/camaleon-cms/tree/2.4.6.6) (2019-08-05)
+- Fixed posts slug index length
+- Added support for rails 6
+- Improved themes list UI
+
 ## [2.4.6.4](https://github.com/owen2345/camaleon-cms/tree/2.4.6.1) (2019-05-02)
 - Updated aws-sdk dependency to include only s3 needed dependency available in aws-sdk v3+
 
